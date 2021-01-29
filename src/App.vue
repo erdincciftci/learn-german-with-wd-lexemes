@@ -6,15 +6,32 @@
  
   <aside class="aside aside-1"> 
 
-<el-card  shadow="hover" class="box-card">
+<el-card shadow="hover" class="box-card">
   <template #header>
     <div class="clearfix">
-      <span> Original Word</span>
+      <span>A random German Word, used in an example sense: </span>
 
     </div>
   </template>
- <h3>  TEst </h3> 
-      <p class="body">    {{example[12]}} </p>
+ <h3>  
+<div v-if="newRandomGermansense === ''">
+  {{example[randomGermanSense].lemma}}
+</div>
+<div v-else-if="newRandomGermansense !== ''">
+  {{example[newRandomGermansense].lemma}}
+</div>
+   </h3> 
+
+      
+<div v-if="newRandomGermansense === ''">
+   <p class="body">  {{example[randomGermanSense].sense}}  </p>
+</div>
+<div v-else>
+  <p class="body">  {{example[newRandomGermansense].sense}} </p>
+</div>
+
+       
+      <el-button type="primary"  @click="createRandomGermanSense"> New Word </el-button>
 </el-card>
     </aside>
 
@@ -43,6 +60,7 @@
  <el-button type="primary"  @click="addTask"> Save </el-button>
     </el-card>
     Test {{translatedList[0]}} 
+   
     
     </footer>
 
@@ -60,7 +78,7 @@
 import HelloWorld from "./components/HelloWorld.vue";
 import { v4 as uuid } from 'uuid'
 import json from '../public/sensewlemma.json'
-import { reactive, toRefs, computed} from 'vue'
+import { reactive, toRefs} from 'vue'
 
 
 export default {
@@ -70,17 +88,25 @@ export default {
   },
 
   setup() {
+
+    
+
     const state = reactive({
       example: json,
       newNativeTranslition: '',
       originalSenses: [],
       translatedList: [],
-    })
-
-   const germanSenses = computed(() => {
-      return state.originalSenses
+      newRandomGermansense: ''
     })
     
+
+    const randomGermanSense = [Math.floor(Math.random() * state.example.length)]
+    
+    const createRandomGermanSense = () => {
+      state.newRandomGermansense =  [Math.floor(Math.random() * state.example.length)]
+      console.log(state.newRandomGermansense)
+    }
+
     const addTask = () => {
       state.translatedList.push({
         id: uuid(),
@@ -95,7 +121,8 @@ export default {
   return {
       ...toRefs(state),
       addTask,
-      germanSenses
+      randomGermanSense,
+      createRandomGermanSense
     }
     }
 };
@@ -138,7 +165,6 @@ export default {
 }
 
 .aside-1 {
-
   background: white;
   text-align: left;
   
