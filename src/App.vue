@@ -1,65 +1,67 @@
 <template>
 <div class="wrapper">
+
   <header class="header"><img style="width: 30px;" alt="Vue logo" src="./assets/logo.png" />
   <HelloWorld class="wmf-wmui-color-green30" msg="Learn German with Wikidata Lexemes!" />
   </header>
- 
+
   <aside class="aside aside-1"> 
 
 <el-card shadow="hover" class="box-card">
   <template #header>
     <div class="clearfix">
-      <span>A random German Word, used in an example sense: </span>
+      <span>German Lemma & Sense </span>
 
     </div>
   </template>
  <h3>  
-<div v-if="newRandomGermansense === ''">
-  {{example[randomGermanSense].lemma}}
-</div>
-<div v-else-if="newRandomGermansense !== ''">
+
   {{example[newRandomGermansense].lemma}}
-</div>
+
    </h3> 
 
-      
-<div v-if="newRandomGermansense === ''">
-   <p class="body">  {{example[randomGermanSense].sense}}  </p>
-</div>
-<div v-else>
-  <p class="body">  {{example[newRandomGermansense].sense}} </p>
-</div>
 
-       
+  <p class="body">  {{example[newRandomGermansense].sense}} </p>
+     
       <el-button type="primary"  @click="createRandomGermanSense"> New Word </el-button>
 </el-card>
     </aside>
-
-
 
    <article class="main">   
 
 <el-card  shadow="hover" class="box-card">
   <template #header>
     <div class="clearfix">
-      <span> With Translation </span>
+      <span> Translate Here </span>
 
     </div>
   </template>
- <h3>  TEst </h3> 
-      <p class="body">  In English: {{ newNativeTranslition }} </p>
-</el-card>
-          
+
+  
+   <el-input  placeholder="Translition for the Word" v-model="newNativeTranslationLemma"  @keyup.enter="addTask"></el-input>
+      <el-divider></el-divider>
      
+ <el-input
+  type="textarea"
+  :autosize="{ minRows: 2, maxRows: 4}"
+  placeholder="Please input"
+  v-model="newNativeTranslationSense">
+</el-input>
+
+ <el-divider></el-divider>
+ 
+ <el-button type="primary"  @click="addTranslation"> Save </el-button>
+</el-card>
+             
   </article>
-  
-  
+
   <footer class="footer"> 
      <el-card shadow="hover">
-           <el-input placeholder="Please input" v-model="newNativeTranslition"  @keyup.enter="addTask"></el-input>
- <el-button type="primary"  @click="addTask"> Save </el-button>
+ <p class="body"> Preview:  {{ newNativeTranslationLemma }} </p>
+
+        Test {{translatedList[0]}} 
+   
     </el-card>
-    Test {{translatedList[0]}} 
    
     
     </footer>
@@ -93,34 +95,45 @@ export default {
 
     const state = reactive({
       example: json,
-      newNativeTranslition: '',
       originalSenses: [],
+      newRandomGermansense: '369',
+      newNativeTranslationLemma: '',
+      newNativeTranslationSense: '',
       translatedList: [],
-      newRandomGermansense: ''
+  
     })
     
 
     const randomGermanSense = [Math.floor(Math.random() * state.example.length)]
-    
+
+
     const createRandomGermanSense = () => {
       state.newRandomGermansense =  [Math.floor(Math.random() * state.example.length)]
       console.log(state.newRandomGermansense)
     }
 
-    const addTask = () => {
+    
+
+    const addTranslation = () => {
+       
       state.translatedList.push({
         id: uuid(),
         complete: false,
         edit: false,
-        label: state.newNativeTranslition
+        originalLemma: state.example[state.newRandomGermansense].lemma,
+        originalSense: state.example[state.newRandomGermansense].sense,
+        translationLemma: state.newNativeTranslationLemma,
+        translationSense: state.newNativeTranslationSense
       })
-      state.newNativeTranslition = ''
+      createRandomGermanSense()
+      state.newNativeTranslationLemma = ''
+        state.newNativeTranslationSense = ''
     }
 
   
   return {
       ...toRefs(state),
-      addTask,
+      addTranslation,
       randomGermanSense,
       createRandomGermanSense
     }
