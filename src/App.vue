@@ -56,13 +56,27 @@
   </article>
 
   <footer class="footer"> 
-     <el-card shadow="hover">
- <p class="body"> Preview:  {{ newNativeTranslationLemma }} </p>
 
-        Test {{translatedList[0]}} 
-   
+<el-space wrap>
+    <el-card shadow="hover" class="box-card" style="width: 250px" 
+    v-for="translatedItem in translatedList" 
+    :key="translatedItem.id">
+      <template #header>
+        <div class="clearfix">
+          <h3>  {{ translatedItem.originalLemma }} </h3>
+            <p class="body">  {{ translatedItem.originalSense }} </p>
+       
+        </div>
+      </template>
+      
+          <p> {{translatedItem.translationLemma}} </p> 
+            <p class="body"> {{translatedItem.translationSense}} </p> 
+            <el-button type="primary"  @click="deleteTranslation(translatedItem.id)"> Delete </el-button>
+           
     </el-card>
-   
+  </el-space>
+ 
+  
     
     </footer>
 
@@ -130,12 +144,21 @@ export default {
         state.newNativeTranslationSense = ''
     }
 
+
+        const deleteTranslation = taskId => {
+      const translationIndex = state.translatedList.findIndex(task => task.id === taskId)
+      state.translatedList.splice(translationIndex, 1)
+    }
+  
+
   
   return {
       ...toRefs(state),
       addTranslation,
       randomGermanSense,
-      createRandomGermanSense
+      createRandomGermanSense,
+      deleteTranslation
+     
     }
     }
 };
