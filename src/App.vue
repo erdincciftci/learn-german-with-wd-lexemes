@@ -1,8 +1,8 @@
 <template>
 <div class="wrapper">
 
-  <header class="header"><img style="width: 30px;" alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld class="wmf-wmui-color-green30" msg="Learn German with Wikidata Lexemes!" />
+  <header class="header">
+  <HelloWorld class="wmf-wmui-color-green30" msg="Learn German with Wikidata Lexeme" />
   </header>
 
   <aside class="aside aside-1"> 
@@ -22,12 +22,16 @@
 
 
   <p class="body">  {{example[newRandomGermansense].sense}} </p>
-     
-      <el-button type="primary"  @click="createRandomGermanSense"> New Word </el-button>
+       
+        <el-divider></el-divider>
+         <div style="margin: 32px 0;"></div>
+      <el-button type="primary"  @click="createRandomGermanSense" icon="el-icon-refresh-left" primary plain> New Lemma & Sense </el-button>
+         
 </el-card>
     </aside>
 
    <article class="main">   
+
 
 <el-card  shadow="hover" class="box-card">
   <template #header>
@@ -38,19 +42,20 @@
   </template>
 
   
-   <el-input  placeholder="Translition for the Word" v-model="newNativeTranslationLemma"  @keyup.enter="addTask"></el-input>
-      <el-divider></el-divider>
+   <el-input  placeholder="Translation for the word" v-model="newNativeTranslationLemma"  @keyup.enter="addTask"></el-input>
      
+     <div style="margin: 16px 0;"></div>
  <el-input
   type="textarea"
   :autosize="{ minRows: 2, maxRows: 4}"
-  placeholder="Please input"
-  v-model="newNativeTranslationSense">
+  placeholder="Please translate the sense here."
+  v-model="newNativeTranslationSense"
+  >
 </el-input>
-
- <el-divider></el-divider>
+<div style="margin: 32px 0;"></div>
+ <!-- <el-divider></el-divider> -->
  
- <el-button type="primary"  @click="addTranslation"> Save </el-button>
+ <el-button type="primary"  icon="el-icon-plus" @click="addTranslation"> Add Translation </el-button>
 </el-card>
              
   </article>
@@ -58,7 +63,7 @@
   <footer class="footer"> 
 
 <el-space wrap>
-    <el-card shadow="hover" class="box-card" style="width: 250px" 
+    <el-card shadow="hover" class="box-card translatedCard" style="width: 250px" 
     v-for="translatedItem in translatedList" 
     :key="translatedItem.id">
       <template #header>
@@ -71,13 +76,10 @@
       
           <p> {{translatedItem.translationLemma}} </p> 
             <p class="body"> {{translatedItem.translationSense}} </p> 
-            <el-button type="primary"  @click="deleteTranslation(translatedItem.id)"> Delete </el-button>
+              <el-button type="danger" @click="deleteTranslation(translatedItem.id)" icon="el-icon-delete" circle></el-button>
            
     </el-card>
   </el-space>
- 
-  
-    
     </footer>
 
     
@@ -166,6 +168,7 @@ export default {
 
 
 <style>
+
 #app {
   font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -173,7 +176,9 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+
 }
+
 
 .wrapper {
   display: flex;  
@@ -189,10 +194,12 @@ export default {
 
 .header {
   background: white;
+  
 }
 
 .footer {
   background: white;
+
 }
 
 .main {
@@ -204,6 +211,10 @@ export default {
   background: white;
   text-align: left;
   
+}
+
+.translatedCard {
+background-color: #f8f9fa;
 }
 
 @media all and (min-width: 600px) {
