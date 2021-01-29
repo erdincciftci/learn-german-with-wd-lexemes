@@ -10,36 +10,43 @@
   <template #header>
     <div class="clearfix">
       <span> Original Word</span>
-    
+
     </div>
   </template>
  <h3>  TEst </h3> 
-      <p class="body">   TEst </p>
+      <p class="body">    {{example[12]}} </p>
 </el-card>
+    </aside>
 
 
 
-    
-   
-    {{example[12]}} </aside>
+   <article class="main">   
 
+<el-card  shadow="hover" class="box-card">
+  <template #header>
+    <div class="clearfix">
+      <span> With Translation </span>
 
-
-   <article class="main">    
-      <el-card shadow="hover">
+    </div>
+  </template>
+ <h3>  TEst </h3> 
+      <p class="body">  In English: {{ newNativeTranslition }} </p>
+</el-card>
+          
+     
+  </article>
+  
+  
+  <footer class="footer"> 
+     <el-card shadow="hover">
            <el-input placeholder="Please input" v-model="newNativeTranslition"  @keyup.enter="addTask"></el-input>
  <el-button type="primary"  @click="addTask"> Save </el-button>
     </el-card>
+    Test {{translatedList[0]}} 
+    
+    </footer>
 
-
-
-  
-  </article>
-  
-  <aside class="aside aside-2"><p> In English: {{ newNativeTranslition }}</p> +  
-  
-  </aside>
-  <footer class="footer"> Test {{translatedList[0]}} </footer>
+    
 </div>
 
  <!-- <li v-for="a in example" :key="a.sense">
@@ -122,20 +129,19 @@ export default {
 }
 
 .footer {
-  background: lightgreen;
+  background: white;
 }
 
 .main {
   text-align: left;
-  
+  background: white;
 }
 
 .aside-1 {
 
-}
-
-.aside-2 {
-  background: hotpink;
+  background: white;
+  text-align: left;
+  
 }
 
 @media all and (min-width: 600px) {
