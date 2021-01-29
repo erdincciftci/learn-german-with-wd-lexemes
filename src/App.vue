@@ -4,19 +4,35 @@
   <HelloWorld class="wmf-wmui-color-green30" msg="Learn German with Wikidata Lexemes!" />
   </header>
  
-  <aside class="aside aside-1"> {{example[12]}} </aside>
+  <aside class="aside aside-1"> 
+
+<el-card  shadow="hover" class="box-card">
+  <template #header>
+    <div class="clearfix">
+      <span> Original Word</span>
+    
+    </div>
+  </template>
+ <h3>  TEst </h3> 
+      <p class="body">   TEst </p>
+</el-card>
+
+
+
+    
+   
+    {{example[12]}} </aside>
+
 
 
    <article class="main">    
-      
-   <input
-        type="text"
-        placeholder="Type a new todo item"
-        class="new-task-input"
-        v-model="newNativeTranslition"
-        @keyup.enter="addTask"
-      />
-      <button class="new-task-button" @click="addTask">+ Add</button>
+      <el-card shadow="hover">
+           <el-input placeholder="Please input" v-model="newNativeTranslition"  @keyup.enter="addTask"></el-input>
+ <el-button type="primary"  @click="addTask"> Save </el-button>
+    </el-card>
+
+
+
   
   </article>
   
@@ -39,6 +55,7 @@ import { v4 as uuid } from 'uuid'
 import json from '../public/sensewlemma.json'
 import { reactive, toRefs, computed} from 'vue'
 
+
 export default {
   name: "App",
   components: {
@@ -50,7 +67,7 @@ export default {
       example: json,
       newNativeTranslition: '',
       originalSenses: [],
-      translatedList: []
+      translatedList: [],
     })
 
    const germanSenses = computed(() => {
@@ -80,7 +97,7 @@ export default {
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -110,11 +127,11 @@ export default {
 
 .main {
   text-align: left;
-  background: deepskyblue;
+  
 }
 
 .aside-1 {
-  background: gold;
+
 }
 
 .aside-2 {
@@ -136,6 +153,20 @@ export default {
 
 body {
   padding: 2em; 
+}
+
+.h3 {
+  font-size: 18px;
+  font-weight: 400;
+  color: #2C3E50;
+
+} 
+
+p.body {
+  color: #2C3E50;
+  font-size: 14px;
+  font-weight: 500;
+
 }
 
 
