@@ -80,6 +80,13 @@
            
     </el-card>
   </el-space>
+<p class="smally"> 
+  LearnGermanwithLexeme 1.0 by Erdi , Source of the data: 
+  <a href='https://query.wikidata.org/#%23Lexemes%20in%20Swedish%20with%20usage%20example%20that%20demonstrates%20both%20a%20form%20and%20a%20sense%0A%23Lexemes%20in%20Swedish%20with%20usage%20example%20that%20demonstrates%20both%20a%20form%20and%20a%20sense%0A%23%20So9q%2023-12-2020%0Aselect%20%20%3Fsense%20%3Flemma%20%0AWHERE%20%7B%0A%20%20%3FlexemeId%20%3Chttp%3A%2F%2Fpurl.org%2Fdc%2Fterms%2Flanguage%3E%20wd%3AQ188%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20wikibase%3Alemma%20%3Flemma%20%3B%0A%20%20%20%20%20%20%20%20%20%20%20%23%20ontolex%3Asense%20%3Fsense%20.%0A%20%20%20%20%20%20%20%20%20ontolex%3Asense%2Fskos%3Adefinition%20%3Fsense%20.%20%0A%0A%7D'> Wikidata (query) </a>
+  Inspired by tools listed <a href="https://www.wikidata.org/wiki/Wikidata:Tools/Lexicographical_data"> here </a>.
+  <a href="https://github.com/erdincciftci"> Github </a>
+  </p>
+
     </footer>
 
     
@@ -244,6 +251,13 @@ body {
 p.body {
   color: #2C3E50;
   font-size: 14px;
+  font-weight: 500;
+
+}
+
+p.smally {
+  color: #2c3e50;
+  font-size: 12px;
   font-weight: 500;
 
 }
